@@ -99,6 +99,12 @@ jobs:
     needs: [detect-changes, build-and-push]
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync docker-compose.yml to server
+        run: |
+          cp docker-compose.yml /home/kowalski/app/docker-compose.yml
+
       - name: Pull and restart changed services
         run: |
           cd /home/kowalski/app
